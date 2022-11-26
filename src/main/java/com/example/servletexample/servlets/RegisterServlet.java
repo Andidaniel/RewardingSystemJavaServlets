@@ -14,6 +14,23 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("DO GET REGISTER");
+
+        HttpSession session = request.getSession();
+        UserDTO currentUser = (UserDTO) session.getAttribute("currentUser");
+        String email ;
+        if(currentUser!=null){
+            email = currentUser.getEmail();
+        }
+        else{
+            email = request.getParameter("email");
+        }
+
+
+        UserDTO userByEmailAndPassword = Users.INSTANCE.findUserByEmail(email);
+        if (userByEmailAndPassword != null){
+            session.setAttribute("currentUser",userByEmailAndPassword);
+            getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+        }
         getServletContext().getRequestDispatcher("/jsp/register.jsp").forward(request, response);
     }
 

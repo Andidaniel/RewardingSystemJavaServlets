@@ -36,13 +36,17 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /* Check has the right credentials and use HomeServlet */
-        Users.INSTANCE.getUsers().forEach(System.out::println);
 
         HttpSession session = request.getSession();
         UserDTO currentUser = (UserDTO) session.getAttribute("currentUser");
+        String email = new String();
+    if(currentUser!=null){
+        email = currentUser.getEmail();
+    }
+    else{
+        email = request.getParameter("email");
+    }
 
-        String email = request.getParameter("email");
 
         UserDTO userByEmailAndPassword = Users.INSTANCE.findUserByEmail(email);
         if (userByEmailAndPassword != null){

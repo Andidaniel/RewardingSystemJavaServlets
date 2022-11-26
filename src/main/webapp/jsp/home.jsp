@@ -20,24 +20,53 @@
     <div class="p-10 bg-white rounded-xl drop-shadow-lg space-y-5">
 
 
-    <h1>YOU ARE ON HOMEPAGE YAY! </h1>
-    <br>
-    <h2>Welcome, <%=user.getEmail()%>,
-        you currently have <%=user.getPoints()%> points
-        and your account is
-        <% if (user.isExternal() == true) { %>
-        EXTERNAL
-        <%} else { %>
-        NOT EXTERNAL
-        <% } %>
-    </h2>
+        <p>YOU ARE ON HOMEPAGE YAY! </p>
+        <br>
+        <p>Welcome, <%=user.getEmail()%>,
+            you currently have <%=user.getPoints()%> points
+            and your account is
+            <% if (user.isExternal() == true) { %>
+            EXTERNAL
+            <%} else { %>
+            NOT EXTERNAL
+            <% } %>
+        </p>
+        <p>Your current level is: <%if(user.getPoints()<100){%>
+            0
+            <%}
+            else if (user.getPoints()>=100&& user.getPoints()<200) {%>
+            1
+            <%}
+            else if (user.getPoints()>=200 && user.getPoints()<300){%>
+            2
+            <%}
+            else if (user.getPoints()>=300 && user.getPoints()<400){%>
+            3
+            <%}
+            else if(user.getPoints() >=400){%>
+            4
+            <%}%>
+        </p>
 
-<form method="POST" action="login">
-    <button class="w-full px-10 py-2 bg-blue-600 text-white rounded-md
-            hover:bg-blue-500 hover:drop-shadow-md duration-300 ease-in" type="submit">
-    Log Out
-    </button>
-</form>
+        <form method="POST" action="/homeServlet">
+
+            <div class="flex flex-col space-y-2">
+            <label class="text-sm font-light" for="sum" >Money to spend: </label>
+            <input class="w-96 px-3 py-2 rounded-md border border-slate-400" type="number" id ="sum" name="sum"  min="0">
+            </div>
+
+            <br>
+
+            <input type="submit" name="order" value="Order" class="w-full px-10 py-2 bg-blue-600 text-white rounded-md
+            hover:bg-blue-500 hover:drop-shadow-md duration-300 ease-in; cursor:pointer" style="cursor: pointer" />
+
+            <br>
+            <br>
+
+            <input type="submit" name="logout" value="Log Out" class="w-full bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4
+                        border border-blue-500 hover:border-transparent rounded duration-300 ease-in" style="cursor: pointer"/>
+        </form>
+
     </div>
 </div>
 </body>
