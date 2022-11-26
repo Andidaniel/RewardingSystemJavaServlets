@@ -2,10 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Tailwindcss import via cdn -->
-    <script src="https://cdn.tailwindcss.com"></script> <!-- This script must be in format <script></script> and not the short form <script/>-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- This script must be in format <script></script> and not the short form <script/>-->
     <!-- You can also Bootstrap, Foundation, MaterialUI etc. -->
 </head>
 <body>

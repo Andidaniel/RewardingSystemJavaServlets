@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
         /* Check if user is already connected, if not show login page */
         System.out.println("GET   LOGIN");
         HttpSession session = request.getSession();
-        User currentUser = (User) session.getAttribute("currentUser");
+        UserDTO currentUser = (UserDTO) session.getAttribute("currentUser");
         System.out.println("USER " + currentUser);
 
         System.out.println("ALL USERS");
@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
         Users.INSTANCE.getUsers().forEach(System.out::println);
 
         HttpSession session = request.getSession();
-        User currentUser = (User) session.getAttribute("currentUser");
+        UserDTO currentUser = (UserDTO) session.getAttribute("currentUser");
 
         String email = request.getParameter("email");
 

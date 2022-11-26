@@ -16,17 +16,25 @@ public enum Users {
     private static final String connectionPassword = "admin";
     private List<UserDTO> users = new ArrayList<>();
 
-    public void addUser(User user, String isExternal) {
+    public boolean addUser(User user, String isExternal) {
         try{
 
             Connection con = DriverManager.getConnection(connectionString,connectionUsername,connectionPassword);
-            String addUserQuery = "INSERT INTO users (username, points, isExternal) VALUES ('"+user.getEmail()+"', 0, " + isExternal + ") ";
             Statement statement = con.createStatement();
+            String getUserQuery = "SELECT * FROM users WHERE username = '"+ user.getEmail() + "';";
+            ResultSet resultSet = statement.executeQuery(getUserQuery);
+            if(resultSet.next() || user.getEmail() == ""){
+              return false;
+            }
+            String addUserQuery = "INSERT INTO users (username, points, \"isExternal\") VALUES ('"+user.getEmail()+"', 0, " + isExternal + ") ";
+            Statement statement2 = con.createStatement();
             statement.executeUpdate(addUserQuery);
+            return true;
         }
         catch(SQLException e){
             System.out.println("Error connecting to Database");
             e.printStackTrace();
+            return false;
         }
 
     }

@@ -9,13 +9,17 @@
 <% UserDTO user = (UserDTO) session.getAttribute("currentUser");%>
 <html>
 <head>
-    <title>Title</title>
+    <title>Purchase</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-<div>
+<div class="w-screen h-screen flex justify-center items-center
+            bg-gradient-to-br from-purple-700 to-amber-700">
+    <div class="p-10 bg-white rounded-xl drop-shadow-lg space-y-5">
+
+
     <h1>YOU ARE ON HOMEPAGE YAY! </h1>
     <br>
     <h2>Welcome, <%=user.getEmail()%>,
@@ -27,6 +31,14 @@
         NOT EXTERNAL
         <% } %>
     </h2>
+
+<form method="POST" action="login">
+    <button class="w-full px-10 py-2 bg-blue-600 text-white rounded-md
+            hover:bg-blue-500 hover:drop-shadow-md duration-300 ease-in" type="submit">
+    Log Out
+    </button>
+</form>
+    </div>
 </div>
 </body>
 </html>

@@ -20,6 +20,9 @@ public class UserDTO {
     public String getEmail() {
         return this.email;
     }
+    public void setEmail(String email){
+        this.email = email;
+    }
 
     public int getPoints() {
         return points;
@@ -29,5 +32,12 @@ public class UserDTO {
         return isExternal;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserDTO {" +
+                "email='" + email + '\'' +
+                ", points=" + points +
+                ", isExternal=" + isExternal +
+                '}';
+    }
 }

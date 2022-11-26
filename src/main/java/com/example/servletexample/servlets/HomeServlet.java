@@ -6,6 +6,7 @@ import com.example.servletexample.model.UserDTO;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import javax.websocket.Session;
 import java.io.IOException;
 
 @WebServlet(name = "HomeServlet", value = "/homeServlet")
@@ -20,6 +21,10 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+            if(request.getParameter("action").equals("sex")){
+                HttpSession session = request.getSession();
+                session.invalidate();
+                getServletContext().getRequestDispatcher("/login").forward(request, response);
+            }
     }
 }

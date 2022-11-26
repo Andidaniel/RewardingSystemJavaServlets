@@ -1,6 +1,7 @@
 package com.example.servletexample.servlets;
 
 import com.example.servletexample.model.User;
+import com.example.servletexample.model.UserDTO;
 import com.example.servletexample.runTimeRepository.Users;
 
 import javax.servlet.*;
@@ -19,7 +20,6 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
         String isExternal = request.getParameter("external");
 
         if(isExternal!=null){
@@ -29,14 +29,18 @@ public class RegisterServlet extends HttpServlet {
         }
 
 
-        System.out.println("REGISTER " + email + " + " + password);
-        User user = new User();
-        user.setEmail(email);
+        System.out.println("REGISTER " + email + " + " + isExternal);
+        UserDTO user = new UserDTO(email,0, Boolean.parseBoolean(isExternal));
 
         HttpSession session = request.getSession();
-        session.setAttribute("currentUser", user);
-        Users.INSTANCE.addUser(user,isExternal);
+        boolean addResult = Users.INSTANCE.addUser(new User(user.getEmail()),isExternal);
+        if(addResult == true){
+            session.setAttribute("currentUser", user);
+            getServletContext().getRequestDispatcher("/login").forward(request, response);
+        }
+        else{
+            getServletContext().getRequestDispatcher("/jsp/errorRegister.jsp").forward(request,response);
+        }
 
-        getServletContext().getRequestDispatcher("/login").forward(request, response);
     }
 }
