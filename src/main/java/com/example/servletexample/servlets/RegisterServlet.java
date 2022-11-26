@@ -20,15 +20,22 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String isExternal = request.getParameter("external");
+
+        if(isExternal!=null){
+            isExternal = "true";
+        }else{
+            isExternal = "false";
+        }
+
 
         System.out.println("REGISTER " + email + " + " + password);
         User user = new User();
         user.setEmail(email);
-        user.setPass(password);
 
         HttpSession session = request.getSession();
         session.setAttribute("currentUser", user);
-        Users.INSTANCE.addUser(user);
+        Users.INSTANCE.addUser(user,isExternal);
 
         getServletContext().getRequestDispatcher("/login").forward(request, response);
     }

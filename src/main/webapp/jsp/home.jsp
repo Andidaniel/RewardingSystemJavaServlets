@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.servletexample.model.UserDTO" %><%--
   Created by IntelliJ IDEA.
   User: Ritan
   Date: 10/15/2022
@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% UserDTO user = (UserDTO) session.getAttribute("currentUser");%>
 <html>
 <head>
     <title>Title</title>
@@ -16,6 +17,16 @@
 <body>
 <div>
     <h1>YOU ARE ON HOMEPAGE YAY! </h1>
+    <br>
+    <h2>Welcome, <%=user.getEmail()%>,
+        you currently have <%=user.getPoints()%> points
+        and your account is
+        <% if (user.isExternal() == true) { %>
+        EXTERNAL
+        <%} else { %>
+        NOT EXTERNAL
+        <% } %>
+    </h2>
 </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.example.servletexample.servlets;
 
 import com.example.servletexample.model.User;
+import com.example.servletexample.model.UserDTO;
 import com.example.servletexample.runTimeRepository.Users;
 import org.thymeleaf.util.ObjectUtils;
 
@@ -42,11 +43,12 @@ public class LoginServlet extends HttpServlet {
         User currentUser = (User) session.getAttribute("currentUser");
 
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
 
-        Optional<User> userByEmailAndPassword = Users.INSTANCE.findUserByEmailAndPassword(email, password);
-        if (userByEmailAndPassword.isPresent())
+        UserDTO userByEmailAndPassword = Users.INSTANCE.findUserByEmail(email);
+        if (userByEmailAndPassword != null){
+            session.setAttribute("currentUser",userByEmailAndPassword);
             getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+         }
         else {
             /* Otherwise, reload the form  */
             getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);

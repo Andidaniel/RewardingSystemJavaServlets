@@ -3,14 +3,12 @@ package com.example.servletexample.model;
 
 public class User {
     private String email;
-    private String pass;
-
     public User() {
     }
 
     public User(String email, String pass) {
         this.email = email;
-        this.pass = pass;
+
     }
 
     public String getEmail() {
@@ -21,19 +19,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
 
     @Override
     public String toString() {
         return "User{" +
                 "email='" + email + '\'' +
-                ", pass='" + pass + '\'' +
                 '}';
     }
 }
