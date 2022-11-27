@@ -24,8 +24,6 @@ public class LoginServlet extends HttpServlet {
         UserDTO currentUser = (UserDTO) session.getAttribute("currentUser");
         System.out.println("USER " + currentUser);
 
-        System.out.println("ALL USERS");
-        Users.INSTANCE.getUsers().forEach(System.out::println);
         /* If not logged */
         if(Objects.isNull(currentUser)) {
             getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);

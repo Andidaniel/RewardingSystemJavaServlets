@@ -14,8 +14,6 @@ public enum Users {
     public static final String connectionString = "jdbc:postgresql://localhost:5432/REWARDING_TW";
     private static final String connectionUsername = "postgres";
     private static final String connectionPassword = "admin";
-    private List<UserDTO> users = new ArrayList<>();
-
     public boolean addUser(User user, String isExternal) {
         try{
 
@@ -39,13 +37,6 @@ public enum Users {
 
     }
 
-    public List<UserDTO> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<UserDTO> users) {
-        this.users = users;
-    }
 
     public UserDTO findUserByEmail(String email) {
         try{
@@ -65,6 +56,20 @@ public enum Users {
         }
         return null;
 
+
+
+    }
+    public void addPoints(String email){
+        try{
+            Connection con = DriverManager.getConnection(connectionString,connectionUsername,connectionPassword);
+            String addPointsQuery = " UPDATE users SET points = points + 10 WHERE username = '"+email+"';";
+            Statement statement = con.createStatement();
+            statement.executeUpdate(addPointsQuery);
+        }
+        catch (SQLException e){
+            System.out.println("Error connecting to Database");
+            e.printStackTrace();
+        }
 
 
     }

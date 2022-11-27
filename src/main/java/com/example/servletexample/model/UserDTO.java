@@ -23,6 +23,9 @@ public class UserDTO {
     public void setEmail(String email){
         this.email = email;
     }
+    public void setPoints(int pointsToAdd){
+        this.points+=pointsToAdd;
+    }
 
     public int getPoints() {
         return points;
